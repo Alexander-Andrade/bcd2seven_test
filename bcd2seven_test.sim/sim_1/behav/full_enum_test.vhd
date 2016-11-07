@@ -45,9 +45,9 @@ architecture Behavioral of full_enum_test is
                 F_out: out std_logic;
                 G_out: out std_logic);
     end COMPONENT;
-    signal in_vec : std_logic_vector(6 downto 0);
-    signal out_vec1 : std_logic_vector(6 downto 0);
-    signal out_vec2 : std_logic_vector(6 downto 0);
+    signal in_vec : std_logic_vector(6 downto 0) := (others=> '0');
+    signal out_vec1 : std_logic_vector(6 downto 0) := (others=> '0');
+    signal out_vec2 : std_logic_vector(6 downto 0) := (others=> '0');
     
    begin
        

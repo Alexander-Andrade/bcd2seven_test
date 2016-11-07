@@ -32,4 +32,4 @@ ExecStep()
    fi
 }
 
-ExecStep xelab -m64 --debug typical --relax -L xil_defaultlib -L secureip --snapshot etalon_tofile_behav --prj C:/Users/Rufus/VivadoProjects/bcd2seven_test/bcd2seven_test.sim/sim_1/behav/etalon_tofile.prj   xil_defaultlib.etalon_tofile
+ExecStep xelab -m64 --debug typical --relax -L xil_defaultlib -L secureip --snapshot etalon_test_behav --prj C:/Users/Rufus/VivadoProjects/bcd2seven_test/bcd2seven_test.sim/sim_1/behav/etalon_test.prj   xil_defaultlib.etalon_test

@@ -8,11 +8,10 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 use STD.textio.ALL;
 use IEEE.std_logic_textio.ALL;
 
-entity etalon_tofile is
-end etalon_tofile;
+entity etalon_test is
+end etalon_test;
 
-architecture Behavioral of etalon_tofile is
-
+architecture Behavioral of etalon_test is
     COMPONENT bcd2seven_behav
         Port ( 
                 notLT: in std_logic;
@@ -53,25 +52,30 @@ architecture Behavioral of etalon_tofile is
     
     signal in_vec : std_logic_vector(6 downto 0) := (others=> '0');
     signal out_vec1 : std_logic_vector(6 downto 0) := (others=> '0');
-    
+    signal out_vec2 : std_logic_vector(6 downto 0) := (others=> '0');
 begin
     
-    UUT1: bcd2seven_behav port map (notLT => in_vec(0), notRBI => in_vec(1), a => in_vec(2), b => in_vec(3), c => in_vec(4), d => in_vec(5), bi_rbo => in_vec(6),A_out => out_vec1(0), B_out => out_vec1(1), C_out => out_vec1(2), D_out => out_vec1(3), E_out => out_vec1(4), F_out => out_vec1(5), G_out => out_vec1(6));
-    
-    
+     UUT1: bcd2seven_behav port map (notLT => in_vec(0), notRBI => in_vec(1), a => in_vec(2), b => in_vec(3), c => in_vec(4), d => in_vec(5), bi_rbo => in_vec(6),A_out => out_vec1(0), B_out => out_vec1(1), C_out => out_vec1(2), D_out => out_vec1(3), E_out => out_vec1(4), F_out => out_vec1(5), G_out => out_vec1(6));
+     UUT2: bcd2seven_dflow port map (notLT => in_vec(0), notRBI => in_vec(1), a => in_vec(2), b => in_vec(3), c => in_vec(4), d => in_vec(5), bi_rbo => in_vec(6),A_out => out_vec2(0), B_out => out_vec2(1), C_out => out_vec2(2), D_out => out_vec2(3), E_out => out_vec2(4), F_out => out_vec2(5), G_out => out_vec2(6));
+       
+
     process
        variable in_vec_line : line;
        variable out_vec_line : line;
-    begin
-       file_open(fetalon, "../../../etalon.txt", write_mode);
        
-       for i in 0 to 127 loop
-             in_vec <= std_logic_vector(to_unsigned(i, in_vec'length));
-             wait for 5 ns;
-             write(in_vec_line, in_vec, right, in_vec'length);
-             writeline(fetalon, in_vec_line);
-             write(out_vec_line, out_vec1, right, out_vec1'length);
-             writeline(fetalon, out_vec_line);
+       variable in_vec_var : std_logic_vector(in_vec'length-1 downto 0) := (others=> '0');
+    begin
+       file_open(fetalon, "../../../etalon.txt", read_mode);
+       
+       while not endfile(fetalon) loop
+        readline(fetalon, in_vec_line);
+        readline(fetalon, out_vec_line);
+        -- Pass the variable to a signal
+        read(in_vec_line, in_vec_var);
+        in_vec <= in_vec_var;
+--        read(out_vec_line, out_vec1);
+--        read(out_vec_line, out_vec2);
+        wait for 5 ns;
        end loop;
        
        file_close(fetalon);

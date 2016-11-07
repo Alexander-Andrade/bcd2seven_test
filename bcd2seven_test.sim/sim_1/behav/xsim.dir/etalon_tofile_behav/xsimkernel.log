@@ -1,3 +1,0 @@
-Running: xsim.dir/etalon_tofile_behav/xsimk.exe -simmode gui -wdb etalon_tofile_behav.wdb -simrunnum 0 -socket 51342
-Design successfully loaded
-Design Loading CPU Usage: 483 ms

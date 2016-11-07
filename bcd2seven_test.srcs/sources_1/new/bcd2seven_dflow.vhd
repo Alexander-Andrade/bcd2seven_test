@@ -77,8 +77,8 @@ begin
                  (bi_rbo and (not a) and (not b) and (not c) and d and notLT) or
                  (bi_rbo and (not a) and (not b) and c and d and notLT) or 
                  (bi_rbo and a and (not b) and c and d and notLT) or  
-                 (bi_rbo and (not a) and b and c and d and notLT) or  
-                 (bi_rbo and a and b and c and d and notLT) or
+                 (bi_rbo and (not a) and b and c and d and notLT) or
+                 (bi_rbo and a and (not b) and (not c) and d and notLT) or
                  (bi_rbo and (not notLT));
         G_out <= (bi_rbo and (not a) and b and (not c) and (not d) and notLT) or
                  (bi_rbo and a and b and (not c) and (not d) and notLT ) or

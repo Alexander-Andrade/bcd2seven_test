@@ -64,6 +64,7 @@ begin
        variable out_vec_line : line;
        
        variable in_vec_var : std_logic_vector(in_vec'length-1 downto 0) := (others=> '0');
+       variable out_vec_var : std_logic_vector(in_vec'length-1 downto 0) := (others=> '0');
     begin
        file_open(fetalon, "../../../etalon.txt", read_mode);
        
@@ -72,10 +73,14 @@ begin
         readline(fetalon, out_vec_line);
         -- Pass the variable to a signal
         read(in_vec_line, in_vec_var);
+        read(out_vec_line, out_vec_var);
         in_vec <= in_vec_var;
---        read(out_vec_line, out_vec1);
---        read(out_vec_line, out_vec2);
         wait for 5 ns;
+        assert out_vec1 = out_vec_var
+        report "bcd2seven_behav fails" severity failure;
+        
+        assert out_vec2 = out_vec_var
+        report "bcd2seven_dflow fails" severity failure;
        end loop;
        
        file_close(fetalon);

@@ -1,0 +1,3 @@
+Running: xsim.dir/full_enum_test_behav/xsimk.exe -simmode gui -wdb full_enum_test_behav.wdb -simrunnum 0 -socket 65201
+Design successfully loaded
+Design Loading CPU Usage: 624 ms
